@@ -10,14 +10,15 @@ call vundle#begin()
 " Plugin Installer
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree' " File Explorer
 Plugin 'tpope/vim-vinegar' " File Explorer
 Plugin 'rking/ag.vim' " File Search
 Plugin 'tpope/vim-rails'
-Plugin 'kien/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-unimpaired'
+Plugin 'kien/ctrlp.vim' " Fuzzy Directory Search (Ctrl + p)
+Plugin 'chrisbra/csv.vim' " Reading CSV Files
 Plugin 'flazz/vim-colorschemes'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
