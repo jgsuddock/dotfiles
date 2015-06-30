@@ -1,2 +1,2 @@
-# vimconifg
+# vimconfig
 My Vim Configuration File
