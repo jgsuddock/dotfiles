@@ -1,0 +1,308 @@
+" vim: filetype=help foldmethod=marker foldmarker=<<<,>>> modifiable noreadonly
+
+*mvn.txt*	For Vim version 7.4.  Last change: 2015 Aug 06
+
+
+My Vim Notes									*mvn*
+
+1. Files................................................|mvnfiles| 
+2. Search and Replace...................................|mvnsearch|
+3. Running Vim in Background............................|mvnbackground|
+4. Plugins..............................................|mvnplugin|
+5. Folding..............................................|mvnfolding|
+6. Misc.................................................|mvnmisc|
+7. About................................................|mvnabout|
+
+
+=================================================================================================
+1. Files (Windows,Tabs,Buffers,Etc)						*mvnfiles*
+
+										*mvnwindows*
+Open File in Split
+	:sp {filepath}
+
+Open File in Vertical Split
+	:vs {filepath}
+
+^w + *  | Description
+--------|----------------------------------------
+h,j,k,l | Switch to Left, Bottom, Top, or Right Window
+H,J,K,L | Move Current Windows to Far Left, Bottom, Top, or Right 
+r       | Swap Files on Split Screen (Rotate Down and Right)
+R       | Swap Files on Split Screen (Rotate Up and Left)
+gf      | Open File Under Cursor in New Tab
+t       | Switch to Top-Left Window
+w       | Switch to Next Window
+n       | New Window
+s       | New Horizontal Split Window
+v       | New Vertical Split Window
+o       | Maximize Current Window (:only)
+
+										*mvntabs*
+New Tab (Ctrl + Insert):
+	:tabe {filepath}
+
+Next Tab (Ctrl + PgUp):
+	:tabn
+	gt
+Previous Tab (Ctrl + PgDn):
+	:tabp
+	gT
+
+Go To Certain Tab:
+	{tab number}gt
+
+Close and save all tabs:
+	:wqa
+
+										*mvnbuffers*
+Close (Save) Current Buffer:
+	:bd (:bw)
+
+Close Buffer {buffer #} (1 or 1,2,3):
+	:{buffer #}bd
+
+Close All Buffers
+	:%bd
+
+Cycle Through Buffers That Contain 'js'
+	:bd js <Tab>
+
+
+=================================================================================================
+2. Search and Replace								*mvnsearch*
+
+Change 'foo' to 'bar' in Current Line
+	:s/foo/bar/g
+
+Change 'foo' to 'bar' in All Lines
+	:%s/foo/bar/g
+
+Change 'foo' to 'bar' in Highlighted Lines
+	:'<,'>s/foo/bar/g
+
+Change 'foo' to 'bar', but ask for confirmation first
+	:%s/foo/bar/gc
+
+
+Delete every line containing "text"
+	:g/text/d
+
+Delete every blank line
+	:g/^\s*$/d
+
+
+> In Confirmation Mode:
+> 	y = substitute match
+> 	n = don't substitute match
+> 	a = substitute this and all remaining matches
+> 	q = quit the command
+> 	l = substitute this match and then quit the command (last)
+> 	Ctrl + E = Scroll Screen Up
+> 	Ctrl + Y = Scroll Screen Down
+
+Search for Currently Highlighted Word (Remap):
+	//
+
+
+Search for foo in every file in the current directory (:cnext):
+	:vim foo * | cw
+
+
+Search for foo in every JavaScript file in the current directory (:cnext):
+	:vim foo *.js | cw
+
+
+Search for foo in every JavaScript file in the current directory recursively (:cnext):
+	:vim foo **/*.js | cw
+
+
+Search for the current word in every file in the current directory (:cnext):
+	:vim <C-r><C-w> * | cw
+	:vim <cword> * | cw
+
+
+Return to previous cursor location
+	Ctrl-O
+
+Move Opposite Direction
+	Ctrl-I
+
+
+=================================================================================================
+3. Running Vim in Background							*mvnbackground*
+
+Run Vim in Background:
+	Ctrl + Z
+
+Return to Vim Session (# shown in jobs):
+	$ fg or $ %#
+
+View Jobs Running in Background:
+	$ jobs
+
+
+=================================================================================================
+4. Plugins									*mvnplugin*
+
+										*mvnvundle*
+Vundle
+	Install and update plugins
+		:PluginInstall!
+	Uninstall removed plugins
+		:PluginClean
+										*mvnctrlp*
+CtrlP
+	Press <F5> (refresh) to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+	Press <c-f> and <c-b> to cycle between modes.
+	Press <c-d> to switch to filename only search instead of full path.
+	Press <c-r> to switch to regexp mode.
+	Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+	Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+	Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+	Use <c-y> to create a new file and its parent directories.
+	Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+	..<Cr> to move up one directory
+	?<Cr> to open CtrlP Help
+
+										*mvnnerdtree*
+NERDTree
+	C : Change Tree Root to Selected Directory
+	u : Change Tree Root Up a Directory
+	U : Change Tree Root Up a Directory Keeping Current Directory Expanded
+
+										*mvnsurround*
+Surround
+
+Add Surrounding Around Word
+	ysiw)
+
+Add brackets around visual select
+	S)
+
+
+Remove Surrounding Brackets
+	ds)
+
+
+> note: "(" adds padding, ")" does not
+
+										*mvngit-fugitive*
+:Git add .
+:Gcommit
+    Type message and then :wq
+:Gpush origin master
+    Type password and <Cr>
+
+=================================================================================================
+5. Folding									*mvnfolding*
+
+Command | Description
+--------|----------------------------------------
+zi      | switch folding on or off
+za      | toggle current fold open/closed
+zc      | close current fold
+zR      | open all folds
+zM      | close all folds
+zv      | expand folds to reveal cursor
+zj      | move down to top of next fold
+zk      | move up to bottom of previous fold
+zo      | open current fold
+zO      | recursively open current fold
+zC      | recursively close current fold
+zA      | recursively open/close current fold
+zm      | reduce `foldlevel` by one
+zr      | increase `foldlevel` by one
+zMzv    | close all folds except for current fold
+
+=================================================================================================
+6. Misc										*mvnmisc*
+
+
+									    	*mvnspell*
+Spell Check
+	Next (Previous) Word
+		]s ([s)
+	Next (Previous) Bad Word
+		]S ([S)
+
+							    			*mvnmotion*
+Motion
+	Return to Previous Cursor Location
+		``
+
+	Return to Start of Line of Previous Cursor Location
+		''
+
+
+Search For All Instances Where a File w/in Directory w/ .java Extension Contains "searchtext"
+	:vimgrep /searchtext/ {directory}/*.java
+			:cnext and :cprev to view next and previous search results
+
+
+Paste and Fix Indentation
+	p=']
+
+
+Jump to End of Line (EOL)
+	$
+
+Jump to Beginning of Line (Soft BOL)
+	^
+
+Jump to Beginning of Line (Hard BOL)
+	0
+
+
+Highlight to Front(End) of Next Word:
+	v + w (v + e)
+
+Hightlight to Front of Previous Word:
+	v + b
+
+
+New Line Before (After) W/O Entering Insert:
+	[{space} (]{space})
+
+Exchange Line W/ Above (Below):
+	[e (]e)
+
+
+Search for next (previous) instance of word under the cursor
+	* (#)
+
+
+Fix Indentation on Entire File
+	gg=G
+
+
+Fix Indentation on Current Line
+	==
+
+
+Turn Off Search Highlighting:
+	Ctrl + N
+
+
+Page Up (Down)
+	Ctrl + F (Ctrl + B)
+
+
+File Comparison
+	$ gvimdiff {file1} {file2}
+
+
+Invert Comment
+	\ci
+
+Toggle Comment as Whole
+	\c{space}
+
+Open HTML File In Web Browser
+    <F5>
+
+=================================================================================================
+7. About							*mvnabout*
+
+To Refresh Tags:
+    :helptags ~/.vim/doc/

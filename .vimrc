@@ -24,6 +24,11 @@
 " Restart Vim and Run
 " 		:PluginInstall!
 
+" Install YouCompleteMe (See installation instructions on https://github.com/Valloric/YouCompleteMe)
+"		cd ~/.vim/bundle/YouCompleteMe
+"		./install.sh --clang-completer
+"
+
 " }}} 
 " Plugins {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
