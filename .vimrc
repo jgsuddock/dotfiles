@@ -1,9 +1,8 @@
-
 " vim: foldmethod=marker foldmarker={{{,}}}
 
 
 " Configuration file for Vi Improved, save as ~/.vimrc to use.
-" Updated on 2015-08-04 by Jake Suddock <jacob.suddock@gmail.com>.
+" Updated on 2016-03-01 by Jake Suddock <jacob.suddock@gmail.com>.
 
 
 " zM - Fold All; zR - Unfold All; za - Toggle Current Fold
@@ -11,9 +10,9 @@
 " Setup {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Install Vundle
-" 		git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" 		vim +PluginInstall +qall
+" Install Vim-Plug on Unix (See https://github.com/junegunn/vim-plug)
+" 		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 " Install Ag
 "		apt-get install silversearcher-ag
@@ -24,112 +23,135 @@
 " Restart Vim and Run
 " 		:PluginInstall!
 
-" Install YouCompleteMe (See installation instructions on https://github.com/Valloric/YouCompleteMe)
+" Install YouCompleteMe on Unix (See https://github.com/Valloric/YouCompleteMe)
+"       sudo apt-get install build-essential cmake python-dev
 "		cd ~/.vim/bundle/YouCompleteMe
-"		./install.sh --clang-completer
+"		./install.py --clang-completer
 "
 
 " }}} 
 " Plugins {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Install vim-plug if we don't already have it
+if empty(glob("~/.vim/autoload/plug.vim"))
+    " Ensure all needed directories exist  (Thanks @kapadiamush)
+    execute 'mkdir -p ~/.vim/plugged'
+    execute 'mkdir -p ~/.vim/autoload'
+    " Download the actual plugin manager
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
 
-" Required Plugin
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " Vim Formatting Plugins
-Plugin 'tpope/vim-surround'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe' " Fuzzy Auto Completion
-Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'bling/vim-airline' " Better Looking Command Line and Tab Line
+Plug 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/nerdcommenter'
+"Plug 'Valloric/YouCompleteMe' 
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'SirVer/ultisnips'
+Plug 'scrooloose/syntastic'
 
 " File Management Plugins
-Plugin 'scrooloose/nerdtree' " File Explorer
-Plugin 'ivalkeen/nerdtree-execute' " Execute System Files Using Nerdtree
-Plugin 'rking/ag.vim' " File Search
-Plugin 'kien/ctrlp.vim' " Fuzzy Directory Search (Ctrl + p)
-
-" Generic Plugins
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-shell'
+Plug 'scrooloose/nerdtree'            " File Explorer
+Plug 'ivalkeen/nerdtree-execute'      " Execute System Files Using Nerdtree
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'rking/ag.vim'                   " File Search
+Plug 'ctrlpvim/ctrlp.vim'             " Fuzzy Directory Search (Ctrl + p)
+Plug 'vim-scripts/a.vim'              " Opens the header file of the current
+                                      " file (or vise-versa)
 
 " Color Schemes
-Plugin 'tomasr/molokai'
-Plugin 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
+Plug 'crusoexia/vim-monokai'
 
 " Language Plugins
-Plugin 'tpope/vim-fugitive' " Git wrapper
-Plugin 'DrawIt' " Ascii drawing plugin
-Plugin 'chrisbra/csv.vim' " Reading CSV Files
-Plugin 'tpope/vim-rails'
-Plugin 'wlangstroth/vim-racket'
-Plugin 'xolox/vim-notes'
-
-" No Vundle Plugin Installation After This Line
-call vundle#end()
-
-set runtimepath+=/home/jake/lilypond/usr/share/lilypond/current/vim
+Plug 'tpope/vim-fugitive'             " Git wrapper
+Plug 'airblade/vim-gitgutter'         " Display Changes To Left of Numbers
+Plug 'tpope/vim-rails'
+Plug 'qrps/lilypond-vim', { 'for': 'lilypond' }
 
 filetype plugin indent on
-syntax on
+call plug#end()
+
+set runtimepath+=/home/jake/lilypond/usr/share/lilypond/current/vim
 
 " }}} 
 " VIM User Interface {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-syntax enable " Enable syntax highlighting
-
-set spell spelllang=en_us
+set nocompatible
+syntax on                       " Enable syntax highlighting (override system)
+"syntax enable                  " Enable syntax highlighting (system settings)
+"set spell spelllang=en_us      " Checks spelling
 
 set wildmode=list:longest,full
 set wildmenu
-set ruler " Always show current position
-set number " Show line numbers
-set showmatch " Show matching brackets when text indicator is over them
+set title                       " Modifies terminal's title
+set ruler                       " Always show current position
+set relativenumber              " Show line numbers relative to cursor
+set number                      " Show line numbers
+set hidden                      " Hide buffers instead of closing them
+                                " Perserves the undo and marks history
+set showmatch                   " Show matching brackets when text  
+                                " indicator is over them
+set ignorecase                  " Ignore Case in Search
+set incsearch                   " Show search matches as you type
+set hlsearch                    " Highlight search matches
 
-set ic " Ignore Case in Search
-set hlsearch " Highlight search matches
-
-set showcmd " Show the input of an *incomplete* command
-set digraph " Input Special Character
-set mat=2 " How many tenths of a second to blink when matching brackets
+set showcmd                     " Show the input of an *incomplete*
+                                " command
+set textwidth=78
+set shiftwidth=4                " Autoindent spacing distance
+set shiftround                  " Use multiple shiftwidth when indenting with '<' and '>'
+set tabstop=4
+set autoindent
+set copyindent                  " copy previous indentation on autoindenting
+set smartindent                 " smarter indent behavior
+set smarttab                    " make tab and backspace smarter
+set backspace=indent,eol,start  " allow backspace over indent, eol, start
+set nowrap
+set formatoptions=tcqlron       " auto-wrap lines/comments at textwidth,
+                                " allow formatting using gq commands,
+                                " long lines not broken in insert mode
+                                " auto-insert comment leader on Enter or O,
+                                " recognize numbered lists
+"set digraph                     " Input Special Character
 
 " visual reselect of just pasted
 nnoremap gp `[v`] 
-
-" better scrolling
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-u>
 
 " Open new split panes to right and bottom
 set splitbelow
 set splitright
 
-set shiftwidth=4 " 1 tab == 4 spaces
-set tabstop=4
-set smarttab
-set autoindent
-set smartindent
+" Mac OS vs Linux clipboard
+if has("mac")
+  set clipboard+=unnamed
+else
+  set clipboard=unnamedplus
+endif
 
+" Mouse Functionality
 if has('mouse')
   set mouse=a
 endif
 
-"augroup myvimrc
-    "au!
-    "au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-"augroup END
+" }}}
+" Colors and Fonts {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+colorscheme monokai
+
 
 " }}}
  " Remapping {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap ; :
+
+let mapleader=","               " changes <leader> from \ to ,
 
 " Open HTML In Browser
 nnoremap <F5> :silent update<Bar>silent !google-chrome-stable %:p &<CR>
@@ -164,10 +186,6 @@ set pastetoggle=<leader>2
 nnoremap <leader>5 :NERDTreeToggle<CR>
 nnoremap - :NERDTreeToggle<CR>
 
-" Enter makes blank lines
-nmap <CR> i<CR><Esc> 
-" O<Esc>j
-
 " Deletes Current File
 nnoremap <leader>rm :call delete(expand('%')) \| bdelete!
 
@@ -187,21 +205,11 @@ nmap <leader>bs :CtrlPMRU<cr>
 inoremap <C-U> <C-G>u<C-U>
 
 " }}}
-" Colors and Fonts {{{
+" Filetype Specific Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Font
-set guifont=Ubuntu\ Mono\ derivative\ Powerline
-
-colorscheme candyman
-set background=dark
-
-" Mac OS vs Linux clipboard
-if has("mac")
-  set clipboard+=unnamed
-else
-  set clipboard=unnamedplus
-endif
+" if javascript, c, or cpp, typing ; in normal mode to add a semicolon
+autocmd Filetype javascript,c,cpp nmap ; A;<Esc>
 
 " }}}
 " Folding {{{
@@ -223,30 +231,14 @@ let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 
 " }}}
-" Plugin Stuff {{{ 
+" Plugin Stuff {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Airline {{{
-if !exists("g:airline_symbols")
-  let g:airline_symbols = {}
-endif
-let g:airline_theme="powerlineish"
-let g:airline_powerline_fonts=1
-let g:airline#extensions#branch#empty_message  =  "no .git"
-let g:airline#extensions#whitespace#enabled    =  0
-let g:airline#extensions#syntastic#enabled     =  1
-let g:airline#extensions#tabline#enabled       =  1
-let g:airline#extensions#tabline#tab_nr_type   =  1 " tab number
-let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
-let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
-
-set laststatus=2
-
-" }}}
-" }}}
-" Filetype Specific Settings {{{
+" delimitMate {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd Filetype javascript nmap ; A;<Esc>
+let delimitMate_expand_cr = 2
+
+" }}}
 
 " }}}
