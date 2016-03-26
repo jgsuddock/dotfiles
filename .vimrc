@@ -47,30 +47,39 @@ call plug#begin('~/.vim/plugged')
 " Vim Formatting Plugins
 Plug 'tpope/vim-surround'
 Plug 'Raimondi/delimitMate'
-Plug 'scrooloose/nerdcommenter'
+Plug 'tomtom/tcomment_vim'
 "Plug 'Valloric/YouCompleteMe' 
+Plug 'junegunn/vim-easy-align'
 Plug 'nelstrom/vim-markdown-folding'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
+Plug 'MarcWeber/vim-addon-mw-utils'    " Used for vim-snipmate
+Plug 'tomtom/tlib_vim'                 " Used for vim-snipmate
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'              " Snippets for vim-snipmate
 Plug 'scrooloose/syntastic'
+" Plug 'vimwiki/vimwiki'
+Plug 'vim-scripts/ReplaceWithRegister'
 
 " File Management Plugins
-Plug 'scrooloose/nerdtree'            " File Explorer
-Plug 'ivalkeen/nerdtree-execute'      " Execute System Files Using Nerdtree
+Plug 'scrooloose/nerdtree'             " File Explorer
+Plug 'ivalkeen/nerdtree-execute'       " Execute System Files Using Nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'rking/ag.vim'                   " File Search
-Plug 'ctrlpvim/ctrlp.vim'             " Fuzzy Directory Search (Ctrl + p)
-Plug 'vim-scripts/a.vim'              " Opens the header file of the current
-                                      " file (or vise-versa)
+Plug 'rking/ag.vim'                    " File Search
+Plug 'ctrlpvim/ctrlp.vim'              " Fuzzy Directory Search (Ctrl + p)
+Plug 'vim-scripts/a.vim'               " Opens the header file of the current
+                                       " file (or vise-versa)
 
 " Color Schemes
 Plug 'chriskempson/base16-vim'
 Plug 'crusoexia/vim-monokai'
 
 " Language Plugins
-Plug 'tpope/vim-fugitive'             " Git wrapper
-Plug 'airblade/vim-gitgutter'         " Display Changes To Left of Numbers
+Plug 'tpope/vim-fugitive'              " Git wrapper
+Plug 'airblade/vim-gitgutter'          " Display Changes To Left of Numbers
 Plug 'tpope/vim-rails'
 Plug 'qrps/lilypond-vim', { 'for': 'lilypond' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
+Plug 'tmhedberg/matchit'
 
 filetype plugin indent on
 call plug#end()
@@ -144,7 +153,6 @@ endif
 
 colorscheme monokai
 
-
 " }}}
  " Remapping {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -176,14 +184,10 @@ map Q gq
 " Set Ctrl-Insert to open a new tab
 nnoremap <C-Insert> :tabnew 
 
-" Make space in normal mode add space
-nnoremap <Space> i<Space><Esc>l
-
 " Togglables without FN keys
 set pastetoggle=<leader>2
 
 " Toggle NERDTree
-nnoremap <leader>5 :NERDTreeToggle<CR>
 nnoremap - :NERDTreeToggle<CR>
 
 " Deletes Current File
@@ -196,9 +200,9 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Easy bindings for its various modes
-nmap <leader>bb :CtrlPBuffer<cr>
-nmap <leader>bm :CtrlPMixed<cr>
-nmap <leader>bs :CtrlPMRU<cr>
+nmap <leader>pb :CtrlPBuffer<cr>
+nmap <leader>pm :CtrlPMixed<cr>
+nmap <leader>ps :CtrlPMRU<cr>
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -207,9 +211,6 @@ inoremap <C-U> <C-G>u<C-U>
 " }}}
 " Filetype Specific Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" if javascript, c, or cpp, typing ; in normal mode to add a semicolon
-autocmd Filetype javascript,c,cpp nmap ; A;<Esc>
 
 " }}}
 " Folding {{{

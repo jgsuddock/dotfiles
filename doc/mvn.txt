@@ -52,7 +52,7 @@ Previous Tab (Ctrl + PgDn):
 Go To Certain Tab:
 	{tab number}gt
 
-Close and save all tabs:
+Close and Save All Tabs:
 	:wqa
 
 										*mvnbuffers*
@@ -67,6 +67,9 @@ Close All Buffers
 
 Cycle Through Buffers That Contain 'js'
 	:bd js <Tab>
+
+Switch to Next Buffer
+	<c ^>
 
 
 =================================================================================================
@@ -299,10 +302,13 @@ Toggle Comment as Whole
 	\c{space}
 
 Open HTML File In Web Browser
-    <F5>
+	<F5>
 
 =================================================================================================
 7. About							*mvnabout*
 
 To Refresh Tags:
-    :helptags ~/.vim/doc/
+	:helptags ~/.vim/doc/
+
+To Modify This Help File:
+	:set ma
