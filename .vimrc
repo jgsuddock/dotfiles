@@ -103,7 +103,7 @@ set relativenumber              " Show line numbers relative to cursor
 set number                      " Show line numbers
 set hidden                      " Hide buffers instead of closing them
                                 " Perserves the undo and marks history
-set showmatch                   " Show matching brackets when text  
+"set showmatch                   " Show matching brackets when text  
                                 " indicator is over them
 set ignorecase                  " Ignore Case in Search
 set incsearch                   " Show search matches as you type
@@ -128,9 +128,6 @@ set formatoptions=tcqlron       " auto-wrap lines/comments at textwidth,
                                 " recognize numbered lists
 "set digraph                     " Input Special Character
 
-" visual reselect of just pasted
-nnoremap gp `[v`] 
-
 " Open new split panes to right and bottom
 set splitbelow
 set splitright
@@ -152,6 +149,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme monokai
+hi MatchParen cterm=none ctermbg=green ctermfg=blue
 
 " }}}
  " Remapping {{{
@@ -160,9 +158,6 @@ colorscheme monokai
 nnoremap ; :
 
 let mapleader=","               " changes <leader> from \ to ,
-
-" Open HTML In Browser
-nnoremap <F5> :silent update<Bar>silent !google-chrome-stable %:p &<CR>
 
 " Ctrl-N turns off highlighting after search
 nmap <silent> <C-N> :silent noh<CR>
@@ -174,6 +169,13 @@ noremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+
+" visual reselect of just pasted
+nnoremap gp `[v`] 
+
+" pastes and then reselects pasted and realigns
+nnoremap p p`[v`]== 
+nnoremap P P`[v`]== 
 
 " // will search for currently highlighted text
 vnoremap // y/<C-R>"<CR>

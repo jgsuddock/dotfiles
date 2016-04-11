@@ -5,19 +5,19 @@
 
 My Vim Notes									*mvn*
 
-1. Files................................................|mvnfiles| 
-2. Search and Replace...................................|mvnsearch|
-3. Running Vim in Background............................|mvnbackground|
-4. Plugins..............................................|mvnplugin|
-5. Folding..............................................|mvnfolding|
-6. Misc.................................................|mvnmisc|
-7. About................................................|mvnabout|
+1. Files................................................|mvn-files| 
+2. Search and Replace...................................|mvn-search|
+3. Running Vim in Background............................|mvn-background|
+4. Plugins..............................................|mvn-plugin|
+5. Folding..............................................|mvn-folding|
+6. Misc.................................................|mvn-misc|
+7. About................................................|mvn-about|
 
 
 =================================================================================================
-1. Files (Windows,Tabs,Buffers,Etc)						*mvnfiles*
+1. Files (Windows,Tabs,Buffers,Etc)						*mvn-files*
 
-										*mvnwindows*
+										*mvn-windows*
 Open File in Split
 	:sp {filepath}
 
@@ -38,7 +38,7 @@ s       | New Horizontal Split Window
 v       | New Vertical Split Window
 o       | Maximize Current Window (:only)
 
-										*mvntabs*
+										*mvn-tabs*
 New Tab (Ctrl + Insert):
 	:tabe {filepath}
 
@@ -55,7 +55,7 @@ Go To Certain Tab:
 Close and Save All Tabs:
 	:wqa
 
-										*mvnbuffers*
+										*mvn-buffers*
 Close (Save) Current Buffer:
 	:bd (:bw)
 
@@ -73,7 +73,7 @@ Switch to Next Buffer
 
 
 =================================================================================================
-2. Search and Replace								*mvnsearch*
+2. Search and Replace								*mvn-search*
 
 Change 'foo' to 'bar' in Current Line
 	:s/foo/bar/g
@@ -133,7 +133,7 @@ Move Opposite Direction
 
 
 =================================================================================================
-3. Running Vim in Background							*mvnbackground*
+3. Running Vim in Background							*mvn-background*
 
 Run Vim in Background:
 	Ctrl + Z
@@ -146,15 +146,15 @@ View Jobs Running in Background:
 
 
 =================================================================================================
-4. Plugins									*mvnplugin*
+4. Plugins									*mvn-plugin*
 
-										*mvnvundle*
+										*mvn-vundle*
 Vundle
 	Install and update plugins
 		:PluginInstall!
 	Uninstall removed plugins
 		:PluginClean
-										*mvnctrlp*
+										*mvn-ctrlp*
 CtrlP
 	Press <F5> (refresh) to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
 	Press <c-f> and <c-b> to cycle between modes.
@@ -168,13 +168,13 @@ CtrlP
 	..<Cr> to move up one directory
 	?<Cr> to open CtrlP Help
 
-										*mvnnerdtree*
+										*mvn-nerdtree*
 NERDTree
 	C : Change Tree Root to Selected Directory
 	u : Change Tree Root Up a Directory
 	U : Change Tree Root Up a Directory Keeping Current Directory Expanded
 
-										*mvnsurround*
+										*mvn-surround*
 Surround
 
 Add Surrounding Around Word
@@ -190,7 +190,7 @@ Remove Surrounding Brackets
 
 > note: "(" adds padding, ")" does not
 
-										*mvngit-fugitive*
+										*mvn-git*
 :Git add .
 :Gcommit
     Type message and then :wq
@@ -198,7 +198,7 @@ Remove Surrounding Brackets
     Type password and <Cr>
 
 =================================================================================================
-5. Folding									*mvnfolding*
+5. Folding									*mvn-folding*
 
 Command | Description
 --------|----------------------------------------
@@ -219,17 +219,17 @@ zr      | increase `foldlevel` by one
 zMzv    | close all folds except for current fold
 
 =================================================================================================
-6. Misc										*mvnmisc*
+6. Misc										*mvn-misc*
 
 
-									    	*mvnspell*
+									    	*mvn-spell*
 Spell Check
 	Next (Previous) Word
 		]s ([s)
 	Next (Previous) Bad Word
 		]S ([S)
 
-							    			*mvnmotion*
+							    			*mvn-motion*
 Motion
 	Return to Previous Cursor Location
 		``
@@ -301,11 +301,14 @@ Invert Comment
 Toggle Comment as Whole
 	\c{space}
 
+Display the current file and file size (full path to file) [includes buffer number]
+	<c g> (1<c g>) [2<c g>]
+
 Open HTML File In Web Browser
 	<F5>
 
 =================================================================================================
-7. About							*mvnabout*
+7. About							*mvn-about*
 
 To Refresh Tags:
 	:helptags ~/.vim/doc/
