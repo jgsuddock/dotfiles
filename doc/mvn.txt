@@ -190,7 +190,7 @@ Remove Surrounding Brackets
 
 > note: "(" adds padding, ")" does not
 
-										*mvn-git*
+										*mvn-git-fugitive*
 :Git add .
 :Gcommit
     Type message and then :wq

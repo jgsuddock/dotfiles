@@ -5,7 +5,7 @@ mvn-buffers	mvn.txt	/*mvn-buffers*
 mvn-ctrlp	mvn.txt	/*mvn-ctrlp*
 mvn-files	mvn.txt	/*mvn-files*
 mvn-folding	mvn.txt	/*mvn-folding*
-mvn-git	mvn.txt	/*mvn-git*
+mvn-git-fugitive	mvn.txt	/*mvn-git-fugitive*
 mvn-misc	mvn.txt	/*mvn-misc*
 mvn-motion	mvn.txt	/*mvn-motion*
 mvn-nerdtree	mvn.txt	/*mvn-nerdtree*
